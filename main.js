@@ -5,10 +5,10 @@ const cx = width / 2;
 const cy = height / 2;
 
 const radius = 8;
-const size = 4 * radius * radius;
-const collide = 1;
-const gravityX = 0.2;
-const gravityY = 0.1;
+const size = 3 * radius * radius;
+const collide = 2;
+const gravityX = 1;
+const gravityY = 0.5;
 const static = true;
 
 let spec = {
@@ -43,15 +43,27 @@ let spec = {
       "range": "width"
     },
     {
+      "name": "yscale",
+      "type": "band",
+      "domain": {
+        "data": "people",
+        "field": "party",
+        "sort": true,
+      },
+      "range": "height",
+      "reverse": true
+    },
+    {
       "name": "color",
       "type": "ordinal",
       "domain": ["เพื่อไทย", "อนาคตใหม่", "พลังประชารัฐ", "ประชาธิปัตย์", "ประชาชาติ","ภูมิใจไทย","พลังท้องถิ่นไท","รวมพลังประชาชาติไทย","พลังไทยรักไทย","ชาติไทยพัฒนา","ชาติพัฒนา","รักษ์ผืนป่าประเทศไทย","พลังชาติไทย","เสรีรวมไทย","พลังปวงชนไทย","เศรษฐกิจใหม่","ครูไทยเพื่อประชาชน","เพื่อชาติ","ประชาธรรมไทย","ประชาชนปฏิรูป","ไทยศรีวิไลย์","ประชานิยม","พลังธรรมใหม่","พลเมืองไทย","ประชาภิวัฒน์","ประชาธิปไตยใหม่",],
-      "range": ["red", "orange", "blue", "lightblue", "gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray"]
+      "range": ["red", "orange", "blue", "lightblue", "gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray"]
     }
   ],
 
   "axes": [
-    { "orient": "bottom", "scale": "xscale" }
+    { "orient": "bottom", "scale": "xscale", "labels": true },
+    // { "orient": "left", "scale": "yscale", "labels": true }
   ],
 
   "marks": [
@@ -61,20 +73,21 @@ let spec = {
       "from": {"data": "people"},
       "encode": {
         "enter": {
+          "size": {"value": size},
           "fill": {"scale": "color", "field": "party"},
           "xfocus": {"scale": "xscale", "field": "vote", "band": 0.5},
           "yfocus": {"value": cy},
+          // "yfocus": {"scale": "yscale", "field": "party", "band": 0.5},
           "tooltip": {"signal": "datum.first_name + ' ' + datum.last_name + ' (พรรค' + datum.party + ')'"}
         },
         "update": {
-          "size": {"value": size},
           "stroke": {"value": "white"},
-          "strokeWidth": {"value": 1},
+          "strokeWidth": {"value": 0},
           "zindex": {"value": 0}
         },
         "hover": {
-          "stroke": {"value": "purple"},
-          "strokeWidth": {"value": 3},
+          "stroke": {"value": "black"},
+          "strokeWidth": {"value": 2},
           "zindex": {"value": 1}
         }
       },

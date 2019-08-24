@@ -1,4 +1,4 @@
-const width = 800;
+const width = 1000;
 const height = 400;
 
 const cx = width / 2;
@@ -17,6 +17,11 @@ let spec = {
   "height": height,
   "padding": {"left": 5, "right": 5, "top": 0, "bottom": 20},
   "autosize": "none",
+  "config": {
+    "style": { "cell": { "stroke": "transparent" } },
+    "axis": { "labelFont": "Noto Sans Thai UI", "titleFont": "Noto Sans Thai UI", "titlePadding": 15 },
+    "text": { "font": "Noto Sans Thai UI" }
+  },
 
   "data": [
     {
@@ -40,8 +45,8 @@ let spec = {
     {
       "name": "color",
       "type": "ordinal",
-      "domain": {"data": "people", "field": "party"},
-      "range": {"scheme": "category20c"}
+      "domain": ["เพื่อไทย", "อนาคตใหม่", "พลังประชารัฐ", "ประชาธิปัตย์", "ประชาชาติ","ภูมิใจไทย","พลังท้องถิ่นไท","รวมพลังประชาชาติไทย","พลังไทยรักไทย","ชาติไทยพัฒนา","ชาติพัฒนา","รักษ์ผืนป่าประเทศไทย","พลังชาติไทย","เสรีรวมไทย","พลังปวงชนไทย","เศรษฐกิจใหม่","ครูไทยเพื่อประชาชน","เพื่อชาติ","ประชาธรรมไทย","ประชาชนปฏิรูป","ไทยศรีวิไลย์","ประชานิยม","พลังธรรมใหม่","พลเมืองไทย","ประชาภิวัฒน์","ประชาธิปไตยใหม่",],
+      "range": ["red", "orange", "blue", "lightblue", "gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray"]
     }
   ],
 
@@ -58,7 +63,8 @@ let spec = {
         "enter": {
           "fill": {"scale": "color", "field": "party"},
           "xfocus": {"scale": "xscale", "field": "vote", "band": 0.5},
-          "yfocus": {"value": cy}
+          "yfocus": {"value": cy},
+          "tooltip": {"signal": "datum.first_name + ' ' + datum.last_name + ' (พรรค' + datum.party + ')'"}
         },
         "update": {
           "size": {"value": size},
